@@ -1,0 +1,10 @@
+logging:
+  filename: keypress2.log
+  format: "%(asctime)s - %(name)s-(%(levelname)s):%(message)s"
+
+sql:
+  host: localhost
+  port: 3367
+  user: keypress
+  pw: keypress
+  db: keypress
