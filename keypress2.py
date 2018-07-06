@@ -3,14 +3,14 @@ import multiprocessing as mp
 import logging
 import yaml
 import time
-import curses
+from curses import wrapper
 
 def fobReader(q):
     time.sleep(10)
     q.put("FOO")
 
 
-def keypress(p):
+def keypress(q,p):
 
     with open("keypress2.yaml", "r") as yamlconfig:
         CONFIG = yaml.load(yamlconfig)
@@ -35,13 +35,13 @@ def setup(stdscr):
     q = ctx.Queue()
     p = ctx.Process(target=fobReader, args=(q,))
     p.start()
-    keypress(p)
+    keypress(q,p)
     p.join()
 
 
 if (__name__ == '__main__'):
     ctx = mp.get_context('spawn')
 
-
+    wrapper(setup)
     pass
 
